@@ -35,6 +35,10 @@ main:focus { outline: none; }
 .brand .i { color: var(--accent-2); margin-left: 2px; }
 .brand .a { color: var(--blue); }
 .brand.large { font-size: clamp(2.5rem, 8vw, 5rem); }
+/* logo oficial (símbolo + nome), recortada por CSS da 20260922_223141000_iOS.jpg sem o slogan e os pilares */
+.logo-full { width: min(440px, 100%); aspect-ratio: 1035 / 830; margin: 0 auto; background: #000 url("20260922_223141000_iOS.jpg") no-repeat 50% 21% / 121%; border-radius: var(--radius); }
+.logo-full--mvv { margin-bottom: 48px; }
+.logo-full--footer { width: min(300px, 100%); }
 .menu { display: flex; align-items: center; gap: 24px; font-size: .92rem; font-weight: 600; }
 .menu a { text-decoration: none; opacity: .85; }
 .menu a:hover { opacity: 1; }

@@ -20,7 +20,7 @@ Não precisa instalar nada, iniciar servidor nem ter internet. Mantenha `index.h
 4. **Design e Experiência:** identidade, slogan, MVV, organograma e redes. Fecha com "Aprenda pensando. Evolua entendendo."
 
 ## Substituições futuras
-- **Logo:** troque o conteúdo de `class="brand"` e `class="brand large"` por `<img src="assets/logo.svg" alt="Mentor IA" width="160" height="44">`, atualize o favicon e remova a nota de wordmark provisório.
+- **Logo (aplicada):** a logo oficial (`20260922_223141000_iOS.jpg`, símbolo + nome, sem slogan) aparece na seção Identidade (#mvv) e no rodapé via `.logo-full` em `styles.css` (recorte por CSS). O menu fica só com o nome em texto e o banner (hero) sem logo, a pedido do grupo.
 - **Equipe (preenchida):** Tecnologia e Desenvolvimento: Filipe Silva Avena e Lucas Araujo de Andrade. Pesquisa e Documentação: Victor Fernandes de Vasconcelos. Design e Experiência: Bruno Nascimento Rocha.
 - **MVV:** confira os textos com a versão aprovada pelo grupo.
 - **Contato (preenchido):** escolamentoria@outlook.com.br, com link `mailto:`.
