@@ -21,9 +21,9 @@ Não precisa instalar nada, iniciar servidor nem ter internet. Mantenha `index.h
 
 ## Substituições futuras
 - **Logo:** troque o conteúdo de `class="brand"` e `class="brand large"` por `<img src="assets/logo.svg" alt="Mentor IA" width="160" height="44">`, atualize o favicon e remova a nota de wordmark provisório.
-- **Equipe:** troque "Integrantes 1 e 2", "Integrante 3" e "Integrante 4" pelos nomes e apague as notas "Nome a preencher".
+- **Equipe (preenchida):** Tecnologia e Desenvolvimento: Filipe Silva Avena e Lucas Araujo de Andrade. Pesquisa e Documentação: Victor Fernandes de Vasconcelos. Design e Experiência: Bruno Nascimento Rocha.
 - **MVV:** confira os textos com a versão aprovada pelo grupo.
-- **Contato:** troque `[E-mail a definir]` só quando houver um e-mail confirmado (aí crie o link `mailto:`).
+- **Contato (preenchido):** escolamentoria@outlook.com.br, com link `mailto:`.
 - **Redes:** em `#redes`, transforme os blocos em links depois de criar os perfis.
 - **Paleta:** as cores ficam nas variáveis do topo de `styles.css`.
 

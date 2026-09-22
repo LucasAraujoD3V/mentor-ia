@@ -16,8 +16,12 @@ Landing page estática de trabalho da faculdade: **Mentor IA**, proposta de plat
 - Link privado do claude.ai: https://claude.ai/artifact/2CcSoRRziUGoxbuARr42mZ
 - `ia.sv0001.com` ficou pendente: este PC ainda não tem acesso SSH ao SERVER (chave `server_deploy_lucaspc` criada, mas falta instalar a pública no servidor).
 
+## Equipe e contato
+- Tecnologia e Desenvolvimento: Filipe Silva Avena, Lucas Araujo de Andrade. Pesquisa e Documentação: Victor Fernandes de Vasconcelos. Design e Experiência: Bruno Nascimento Rocha (papéis distribuídos pela ordem em que os nomes foram passados; confirmar com o grupo).
+- E-mail do projeto: escolamentoria@outlook.com.br.
+
 ## Placeholders
-MVV provisório, nomes da equipe, e-mail e perfis de redes. Não há login, IA real nem dados salvos.
+MVV provisório e perfis de redes. Não há login, IA real nem dados salvos.
 
 ## Configuracao
 Todas as credenciais estão no `Cofre.md` na raiz da pasta `Data`, fora do versionamento e nunca postado no git. Este projeto não usa variáveis de ambiente.

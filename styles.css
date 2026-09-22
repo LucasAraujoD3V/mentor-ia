@@ -102,6 +102,7 @@ p + p { margin-top: 14px; }
 .card--img > div { padding: 24px; }
 .card ul { padding-left: 18px; display: grid; gap: 6px; color: var(--muted); }
 .card--team { text-align: center; }
+.email { color: var(--accent-strong); font-weight: 700; overflow-wrap: anywhere; }
 .card--team p:first-of-type { font-size: 1.1rem; font-weight: 700; }
 
 .value { border: 1px solid #2a2a2a; border-radius: var(--radius); padding: 24px; transition: background .3s, border-color .3s; }
