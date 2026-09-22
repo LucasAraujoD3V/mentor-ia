@@ -11,7 +11,7 @@
 Não é necessário instalar nada, iniciar servidor ou ter conexão com a internet. Mantenha `index.html`, `styles.css`, `script.js`, a pasta `assets/` e a imagem da logo (`20260922_223141000_iOS.jpg`) juntos. Os títulos usam Poppins e o texto usa Inter quando essas fontes estão instaladas, com Arial/Helvetica como alternativas locais.
 
 ## O que está entregue
-- Landing page que abre com um banner preto: a logo oficial de um lado e, ao redor dela, o título "Aprenda pensando. Evolua entendendo.", o texto de apresentação e os botões. Depois vêm contexto, propósito, produto, demonstração e identidade.
+- Landing page que abre com um banner preto: a logo oficial inteira (com o slogan e os 4 pilares da arte) de um lado e, ao lado dela, o título "Aprenda pensando. Evolua entendendo.", o texto de apresentação e os botões. Depois vêm contexto, propósito, produto, demonstração e identidade.
 - Paleta do site e do brandbook tirada da própria logo: verde `#0FA83E`, amarelo `#F5CC05`, azul `#0B4BC0` e preto `#0A0A0A`.
 - Missão, Visão e os seis Valores. **Atenção:** os textos atuais foram escritos nesta versão. Se o grupo tem a versão aprovada em outra conversa, é preciso colar em `index.html`, seção `#mvv`, e apagar a nota "Revise estes textos".
 - Organograma com os quatro integrantes: Filipe Silva Avena e Lucas Araujo de Andrade em Tecnologia e Desenvolvimento, Victor Fernandes de Vasconcelos em Pesquisa e Documentação e Bruno Nascimento Rocha em Design e Experiência. Decisões compartilhadas.
