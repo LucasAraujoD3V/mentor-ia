@@ -3,7 +3,7 @@
 Landing page estática de trabalho da faculdade: **Mentor IA**, proposta de plataforma Web que orienta alunos do ensino médio com perguntas, pistas e verificação (slogan "Aprenda pensando. Evolua entendendo.").
 
 ## Estrutura
-- `index.html`: página única. Seções: hero, sobre/contexto (#sobre), Missão/Visão/6 valores (#mvv), produto (#produto), demo em 4 etapas (#demo), plataforma, organograma (#equipe), contato/redes (#redes), footer.
+- `index.html`: página única, **na ordem das 5 falas da apresentação**: banner com a logo + título (Filipe) → #sobre (Victor) → #produto + #plataforma (Lucas) → #demo (Filipe) → #mvv, #equipe, #redes e footer (Bruno). Não mudar a ordem sem atualizar o roteiro do README.
 - `styles.css`: paleta nas variáveis `:root` do topo, com as cores da logo (verde #0FA83E, verde escuro #00872F para botões/texto sobre branco, amarelo #F5CC05, azul #0B4BC0, preto #0A0A0A). Títulos em Poppins, texto em Inter (fallback Arial). Layout inspirado no Ripper (hero em tela cheia, marquee, títulos em caixa alta, cards com foto), com código próprio.
 - Logo no site: `.logo-full` (recorte por CSS da `20260922_223141000_iOS.jpg`, símbolo + nome, sem slogan/pilares) como banner do topo (`.logo-banner`: fundo preto, logo ocupando a altura da tela) e no rodapé. O título/slogan, o texto e os botões ficam na seção logo abaixo (`.hero`, com a foto). **Não** colocar logo no menu ao lado do nome: pedido explícito do usuário.
 - `script.js`: menu móvel (fecha com Escape), animação ao rolar (IntersectionObserver), demo simulada (digite 1 a 4 para trocar de etapa; na etapa 4 a resposta certa é 3).

@@ -22,13 +22,22 @@ Não é necessário instalar nada, iniciar servidor ou ter conexão com a intern
 - HTML semântico, link "Pular para o conteúdo", foco visível, menu que funciona pelo teclado e fecha com Escape, feedback da demo anunciado para leitores de tela e respeito à preferência de movimento reduzido.
 
 ## Como apresentar — cinco partes, cerca de 5 minutos
-Divisão combinada pelo grupo. Use os links do menu para ir direto a cada seção.
+Divisão combinada pelo grupo. A página já está na ordem das falas: cada um desce a página até o título da parte seguinte e passa a vez.
 
-1. **Filipe — Abertura:** mostra o banner com a logo e o título. Apresenta o Mentor IA, o grupo e o que vai ser mostrado.
-2. **Victor — Pesquisa e Documentação (seção Sobre):** apresenta o contexto (a IA entrega a resposta pronta), o público (ensino médio, de 14 a 18 anos, e professores) e a proposta de valor (pistas em vez de respostas). Explica que o projeto está em desenvolvimento e em validação.
-3. **Lucas — Tecnologia e Desenvolvimento (seções Produto e Plataforma):** explica a integração aluno + professor + IA, o acompanhamento proposto, a plataforma Web e a expansão futura.
-4. **Filipe — Demonstração:** clica em "Veja como funciona", digita `3` para mostrar a pista e depois `4` para mostrar a verificação, e responde `3` (a resposta certa). Explica que é uma simulação pré-programada.
-5. **Bruno — Design e Experiência (seções Missão, Equipe e Contato):** apresenta a identidade (logo, cores e mascote), o slogan, a missão, a visão e os valores, o organograma e o planejamento de redes. Encerra retomando "Aprenda pensando. Evolua entendendo."
+1. **Filipe — Abertura** (do topo até a faixa verde que corre na tela):
+   banner com a logo → título "Aprenda pensando. Evolua entendendo." e o texto de apresentação. Apresenta o Mentor IA, o grupo e o que vai ser mostrado.
+   *Para em:* "Contexto e propósito".
+2. **Victor — Pesquisa e Documentação** (seção "Contexto e propósito", com o título "A resposta pronta não ensina a pensar"):
+   contexto, público-alvo, proposta de valor e o aviso de que o projeto está em desenvolvimento e em validação.
+   *Para em:* "Produto".
+3. **Lucas — Tecnologia e Desenvolvimento** (seções "Produto", com o título "Um mentor que faz perguntas", e "Plataforma", com o título "Web primeiro"):
+   funcionalidades, benefícios e diferenciais, o esquema Aluno → Mentor IA → Professor, o acompanhamento pelo professor, a plataforma Web, o acesso ainda em definição e a expansão futura.
+   *Para em:* "Demonstração interativa".
+4. **Filipe — Demonstração** (seção "Veja como funciona em 4 etapas"):
+   digita `3` e clica em Ir para mostrar a pista, depois `4` para mostrar a verificação, e responde `3` (a resposta certa). Explica que é uma simulação pré-programada.
+   *Para em:* "Missão, Visão e Valores".
+5. **Bruno — Design e Experiência** (de "Missão, Visão e Valores" até o fim da página):
+   identidade (a logo do banner, as cores e o mascote do brandbook), missão, visão, os 6 valores, o organograma ("Quem está construindo"), contato e redes. Encerra no rodapé retomando "Aprenda pensando. Evolua entendendo."
 
 ## Substituições futuras
 - **Logo:** a imagem enviada pela equipe é `20260922_223141000_iOS.jpg`, na raiz. O banner e o rodapé mostram um recorte dela, só com o símbolo e o nome, feito em `.logo-full` no `styles.css`. Para trocar a logo, substitua esse arquivo com o mesmo nome e ajuste o recorte se as proporções mudarem.

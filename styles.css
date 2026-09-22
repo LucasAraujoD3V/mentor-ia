@@ -123,6 +123,7 @@ p + p { margin-top: 14px; }
 .flow__item { flex: 1; background: var(--tint); border-radius: var(--radius); padding: 22px; display: grid; gap: 4px; text-align: center; }
 .flow__item strong { text-transform: uppercase; font-weight: 900; }
 .flow__item span { color: var(--muted); font-size: .92rem; }
+.section--tint .flow__item { background: var(--paper); }
 .flow__item--ia { background: var(--blue); color: #fff; }
 .flow__item--ia span { color: rgba(255,255,255,.85); }
 .flow__arrow { align-self: center; font-size: 1.8rem; font-weight: 900; color: var(--accent-strong); }
