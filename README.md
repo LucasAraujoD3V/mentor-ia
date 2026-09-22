@@ -20,7 +20,7 @@ Não precisa instalar nada, iniciar servidor nem ter internet. Mantenha `index.h
 4. **Design e Experiência:** identidade, slogan, MVV, organograma e redes. Fecha com "Aprenda pensando. Evolua entendendo."
 
 ## Substituições futuras
-- **Logo (aplicada):** a logo oficial (`20260922_223141000_iOS.jpg`, símbolo + nome, sem slogan) aparece na seção Identidade (#mvv) e no rodapé via `.logo-full` em `styles.css` (recorte por CSS). O menu fica só com o nome em texto e o banner (hero) sem logo, a pedido do grupo.
+- **Logo (aplicada):** a logo oficial (`20260922_223141000_iOS.jpg`, símbolo + nome, sem slogan) é o banner do topo (`.logo-banner`, logo em tela cheia sobre fundo preto) e aparece de novo no rodapé, via `.logo-full` em `styles.css` (recorte por CSS). O título, o texto e os botões ficam logo abaixo do banner, sobre a foto. O menu fica só com o nome em texto.
 - **Equipe (preenchida):** Tecnologia e Desenvolvimento: Filipe Silva Avena e Lucas Araujo de Andrade. Pesquisa e Documentação: Victor Fernandes de Vasconcelos. Design e Experiência: Bruno Nascimento Rocha.
 - **MVV:** confira os textos com a versão aprovada pelo grupo.
 - **Contato (preenchido):** escolamentoria@outlook.com.br, com link `mailto:`.
