@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
@@ -37,7 +37,7 @@
   .logo-var { border-radius: 16px; min-height: 180px; display: grid; place-items: center; padding: 24px; text-align: center; }
   .wordmark { font-family: var(--titulo); font-weight: 800; font-size: clamp(2rem, 5vw, 3rem); letter-spacing: -.02em; }
   .wordmark .i { color: var(--amarelo); } .wordmark .a { color: var(--azul); }
-  .simbolo { width: 100%; aspect-ratio: 1; border-radius: 16px; background: #000 url('20260922_223141000_iOS.jpg') no-repeat; background-size: 165%; background-position: 50% 22%; }
+  .simbolo { width: 100%; aspect-ratio: 1; border-radius: 16px; background: #000 url('20260922_223141000_iOS.jpg') no-repeat; background-size: 190%; background-position: 50% 12%; }
   .rotulo { font-size: .8rem; color: var(--cinza); margin-top: 8px; }
   ul.regras { list-style: none; display: grid; gap: 8px; }
   ul.regras li::before { content: "✕ "; color: #D92D20; font-weight: 800; }
@@ -70,7 +70,13 @@
     .g4, .pilares { grid-template-columns: repeat(2, 1fr); }
     .masc svg { max-width: 240px; margin: 0 auto; }
   }
-  @media print { section { padding: 36px 0; } .capa { -webkit-print-color-adjust: exact; print-color-adjust: exact; } * { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
+  @page { size: A4; margin: 10mm; }
+  @media print {
+    .capa__grid, .g2 { grid-template-columns: 1fr 1fr; } .g3 { grid-template-columns: repeat(3, 1fr); }
+    .g4, .pilares { grid-template-columns: repeat(4, 1fr); } .masc { grid-template-columns: 220px 1fr; }
+    .wrap { width: 100%; } section + section { break-before: page; }
+  }
+  @media print { section { padding: 24px 0; border: 0; } .capa { -webkit-print-color-adjust: exact; print-color-adjust: exact; } * { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }
 </style>
 </head>
 <body>
