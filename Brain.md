@@ -10,6 +10,7 @@ Landing page estática de trabalho da faculdade: **Mentor IA**, proposta de plat
 - `script.js`: menu móvel (fecha com Escape), animação ao rolar (IntersectionObserver), demo simulada (digite 1 a 4 para trocar de etapa; na etapa 4 a resposta certa é 3).
 - `assets/`: 6 fotos do Unsplash.
 - `brandbook.html`: manual de marca (conceito, logo, slogan, paleta tirada da logo `20260922_223141000_iOS.jpg`, tipografia Poppins/Inter, mascote Menti em SVG, aplicações). Paleta: verde #0FA83E, azul #0B4BC0, amarelo #F5CC05, verde claro #22C10D, preto #0A0A0A. O slogan da logo ("Aprenda hoje, evolua sempre.") diverge do slogan do site; o grupo precisa escolher um.
+- Links para o brandbook no site: botões na seção #mvv (abrir a página e baixar o PDF) e link no rodapé.
 - `Brandbook-MentorIA.pdf`: PDF de 8 páginas do brandbook, gerado com Edge headless (`msedge --headless=new --no-pdf-header-footer --print-to-pdf=... brandbook.html`).
 - `README.md`: como abrir, roteiro de apresentação, o que substituir. `REDES-SOCIAIS.md`: 3 textos de posts.
 

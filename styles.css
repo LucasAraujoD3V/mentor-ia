@@ -156,6 +156,7 @@ kbd { background: var(--ink); color: #fff; padding: 1px 7px; border-radius: 5px;
 .org__top small { font-weight: 500; text-transform: none; opacity: .85; }
 .org__line { width: 2px; height: 40px; background: var(--accent-2); margin: 0 auto 20px; }
 
+.cta-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
 .cta-band { margin-top: 40px; background: var(--ink); color: #fff; border-radius: var(--radius); padding: 36px; display: flex; flex-wrap: wrap; gap: 20px; align-items: center; justify-content: space-between; }
 .cta-band h3 { font-size: 1.6rem; text-transform: uppercase; margin: 0; }
 

@@ -18,7 +18,7 @@ Não é necessário instalar nada, iniciar servidor ou ter conexão com a intern
 - Público-alvo, funcionalidades propostas, benefícios pretendidos e diferenciais, sem alegar resultados comprovados.
 - Plataforma Web, condições de acesso ainda em definição e demonstração interativa em quatro etapas.
 - CTAs e contatos reais: e-mail `escolamentoria@outlook.com.br` (link `mailto:`) e Instagram [@escolamentoria](https://www.instagram.com/escolamentoria/), na seção Contato e no rodapé. O LinkedIn continua como planejamento.
-- Brandbook com conceito, logotipo, slogan, paleta, tipografia, o mascote Menti e aplicações, em página web e em PDF de 8 páginas.
+- Brandbook com conceito, logotipo, slogan, paleta, tipografia, o mascote Menti e aplicações, em página web e em PDF de 8 páginas O site tem os botões "Ver brandbook" e "Baixar brandbook (PDF)" na seção Missão, Visão e Valores, e um link no rodapé.
 - HTML semântico, link "Pular para o conteúdo", foco visível, menu que funciona pelo teclado e fecha com Escape, feedback da demo anunciado para leitores de tela e respeito à preferência de movimento reduzido.
 
 ## Como apresentar — cinco partes, cerca de 5 minutos
