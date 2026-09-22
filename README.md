@@ -17,7 +17,7 @@ Não é necessário instalar nada, iniciar servidor ou ter conexão com a intern
 - Organograma com os quatro integrantes: Filipe Silva Avena e Lucas Araujo de Andrade em Tecnologia e Desenvolvimento, Victor Fernandes de Vasconcelos em Pesquisa e Documentação e Bruno Nascimento Rocha em Design e Experiência. Decisões compartilhadas.
 - Público-alvo, funcionalidades propostas, benefícios pretendidos e diferenciais, sem alegar resultados comprovados.
 - Plataforma Web, condições de acesso ainda em definição e demonstração interativa em quatro etapas.
-- CTAs e contato real (`escolamentoria@outlook.com.br`, com link `mailto:`). As redes sociais continuam como planejamento.
+- CTAs e contatos reais: e-mail `escolamentoria@outlook.com.br` (link `mailto:`) e Instagram [@escolamentoria](https://www.instagram.com/escolamentoria/), na seção Contato e no rodapé. O LinkedIn continua como planejamento.
 - Brandbook com conceito, logotipo, slogan, paleta, tipografia, o mascote Menti e aplicações, em página web e em PDF de 8 páginas.
 - HTML semântico, link "Pular para o conteúdo", foco visível, menu que funciona pelo teclado e fecha com Escape, feedback da demo anunciado para leitores de tela e respeito à preferência de movimento reduzido.
 
@@ -42,7 +42,7 @@ Divisão combinada pelo grupo. A página já está na ordem das falas: cada um d
 ## Substituições futuras
 - **Logo:** a imagem enviada pela equipe é `20260922_223141000_iOS.jpg`, na raiz. O banner e o rodapé mostram um recorte dela, só com o símbolo e o nome, feito em `.logo-full` no `styles.css`. Para trocar a logo, substitua esse arquivo com o mesmo nome e ajuste o recorte se as proporções mudarem.
 - **Slogan:** a arte da logo diz "Aprenda hoje, evolua sempre.", enquanto o site e o roteiro usam "Aprenda pensando. Evolua entendendo.". O grupo precisa escolher um. Por isso o recorte da logo no site esconde o slogan dela.
-- **Redes:** em `#redes`, transforme os blocos provisórios em links para os perfis reais depois de criá-los. Instagram e LinkedIn são sugestões de planejamento, não contas existentes.
+- **Redes:** o Instagram já tem link. Quando o LinkedIn for criado, transforme o bloco dele em `#redes` num link, como foi feito com o Instagram.
 - **Paleta:** as cores estão nas variáveis do início de `styles.css`.
 
 ## Testes realizados
@@ -58,11 +58,11 @@ Verificado no navegador Chromium do Claude Code, no link publicado:
 Não foi feita auditoria formal de acessibilidade (WCAG) nem teste com um leitor de tela real.
 
 ## Limites e próximos entregáveis da Semana 5
-A landing page não tem login, IA real, envio de mensagens nem armazenamento de dados. A demonstração não faz diagnóstico e não mede desempenho real. Os perfis de redes sociais são placeholders.
+A landing page não tem login, IA real, envio de mensagens nem armazenamento de dados. A demonstração não faz diagnóstico e não mede desempenho real. O LinkedIn ainda é um placeholder.
 
 A orientação da Semana 5 pede **link publicado, perfis/posts e banner impresso de 0,80 × 1,20 m**. Situação de cada um:
 - **Link publicado:** feito, no GitHub Pages (link no topo deste arquivo).
-- **Perfis/posts:** os perfis ainda não foram criados. O arquivo `REDES-SOCIAIS.md` tem três textos iniciais.
+- **Perfis/posts:** o Instagram está criado (https://www.instagram.com/escolamentoria/) e já tem link no site. Os posts ainda precisam ser publicados; o arquivo `REDES-SOCIAIS.md` tem três textos iniciais.
 - **Banner impresso:** ainda precisa ser produzido e impresso. O brandbook traz a orientação de layout. Como o endereço público já existe, o QR Code do banner pode ser gerado apontando para o link acima.
 
 Fotos: Unsplash (licença gratuita).
