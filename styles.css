@@ -54,8 +54,6 @@ main:focus { outline: none; }
 .btn--ghost-dark:hover { background: var(--ink); color: #fff; }
 
 /* ===== Hero ===== */
-/* banner: a logo ocupa o espaço do banner, o preto do fundo se funde com o preto da imagem */
-/* banner: fundo preto igual ao da arte da logo, com os textos ao redor dela */
 .hero { position: relative; min-height: 100vh; display: flex; align-items: center; background: #000; color: #fff; padding: 100px 0 56px; overflow: hidden; }
 .hero__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(24px, 4vw, 64px); align-items: center; }
 .hero__content { position: relative; }
