@@ -1,4 +1,3 @@
-// ===== Menu móvel (abre/fecha, Escape, fecha ao clicar num link) =====
 const menuBtn = document.querySelector('.menu-btn');
 const menu = document.getElementById('menu');
 
@@ -16,7 +15,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// ===== Animação ao rolar =====
 const reveals = document.querySelectorAll('.reveal');
 if ('IntersectionObserver' in window) {
   const io = new IntersectionObserver(entries => {
@@ -29,7 +27,6 @@ if ('IntersectionObserver' in window) {
   reveals.forEach(el => el.classList.add('in'));
 }
 
-// ===== Demonstração em 4 etapas (simulação pré-programada) =====
 const tabs = document.querySelectorAll('.steps button');
 const panels = document.querySelectorAll('.panel');
 const form = document.getElementById('answer');
@@ -37,7 +34,7 @@ const input = document.getElementById('resposta');
 const label = document.getElementById('answer-label');
 const btn = document.getElementById('answer-btn');
 const feedback = document.getElementById('feedback');
-const CORRETA = '3'; // 2x + 4 = 10  ->  x = 3
+const CORRETA = '3';
 let step = 1;
 
 function goTo(n) {
