@@ -148,7 +148,7 @@ function medir(fn) {
 }
 
 // ---------- Rotas ----------
-export async function estudos(req, res, url, { auth, json, readBody, rate, origin }) {
+export async function estudos(req, res, url, { auth, json, readBody, rate, origin, clientIp = req => req.socket.remoteAddress }) {
   const rota = url.pathname.slice('/api/estudos/'.length), q = url.searchParams;
   if (req.method === 'GET') {
     const u = auth(req);
@@ -169,7 +169,7 @@ export async function estudos(req, res, url, { auth, json, readBody, rate, origi
   if (req.method !== 'POST') fail('Página não encontrada.', 404);
   // Mesma proteção contra CSRF das demais rotas de alteração.
   if (req.headers.origin !== origin || req.headers['x-mentor-request'] !== '1' || !req.headers['content-type']?.startsWith('application/json')) fail('Solicitação não autorizada.', 403);
-  rate(`estudos:${req.socket.remoteAddress}`, 600);
+  rate(`estudos:${clientIp(req)}`, 600);
   const b = await readBody(req), u = auth(req);
   const idDe = () => vazio(b.id) ? 0 : identificador(b.id, 'Registro');
 

@@ -24,6 +24,8 @@ function rate(key, max, windowMs = 900000) {
   if (!record || record.until < now) { record = { count: 0, until: now + windowMs }; limits.set(key, record); }
   if (++record.count > max) fail('Muitas tentativas. Aguarde 15 minutos e tente novamente.', 429);
 }
+// Atrás do Cloudflare Tunnel toda conexão vem de 127.0.0.1; o IP real chega no cabeçalho indicado.
+export const clientIp = req => (process.env.TRUST_PROXY_HEADER && req.headers[process.env.TRUST_PROXY_HEADER]) || req.socket.remoteAddress;
 function cookies(req) {
   return Object.fromEntries((req.headers.cookie || '').split(';').map(x => x.trim().split('=')));
 }
@@ -118,7 +120,7 @@ async function readBody(req) {
 }
 async function api(req, res, url) {
   const route = url.pathname, method = req.method;
-  if (route.startsWith('/api/estudos/')) return estudos(req, res, url, { auth, json, readBody, rate, origin }); // Fase 3
+  if (route.startsWith('/api/estudos/')) return estudos(req, res, url, { auth, json, readBody, rate, origin, clientIp }); // Fase 3
   if (method === 'GET' && route === '/api/config') return json(res, { version: '0.2.0', google, development: !production, localMailbox: !production && !realMail, realMail, legalVersion: '2026-10-19-academica' });
   if (method === 'GET' && route === '/api/dev/mail') {
     if (production || realMail || !['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(req.socket.remoteAddress)) fail('Página não encontrada.', 404);
@@ -137,7 +139,7 @@ async function api(req, res, url) {
   if (method !== 'POST') fail('Página não encontrada.', 404);
   // No cross-origin API use. Origin and custom header prevent form/CSRF attacks.
   if (req.headers.origin !== origin || req.headers['x-mentor-request'] !== '1' || !req.headers['content-type']?.startsWith('application/json')) fail('Solicitação não autorizada.', 403);
-  rate(`ip:${req.socket.remoteAddress}`, 100);
+  rate(`ip:${clientIp(req)}`, 100);
   const body = await readBody(req);
   if (route === '/api/register') {
     const e = email(body.email), name = text(body.name, 80);
@@ -264,7 +266,7 @@ async function api(req, res, url) {
 
 async function startGoogle(req, res) {
   if (!google) fail('Acesso com Google ainda não configurado.', 503);
-  rate('google:' + req.socket.remoteAddress, 10);
+  rate('google:' + clientIp(req), 10);
   const state = random(), verifier = random(), nonce = random();
   db.prepare('INSERT INTO oauth VALUES (?,?,?,?)').run(digest(state), verifier, nonce, Date.now() + 600000);
   cookie(res, 'mentor_oauth', state, 600);
