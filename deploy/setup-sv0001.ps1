@@ -12,6 +12,6 @@ icacls "$base\data" /grant '*S-1-5-19:(OI)(CI)M' | Out-Null
 icacls "$base\server.log" /grant '*S-1-5-19:M' | Out-Null
 icacls "$base\.env" /inheritance:r /grant '*S-1-5-19:R' '*S-1-5-18:F' '*S-1-5-32-544:F' | Out-Null
 $config = New-ScheduledTaskSettingsSet -ExecutionTimeLimit 0 -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 1) -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries
-Register-ScheduledTask -TaskName 'Mentor-IA' -Action (New-ScheduledTaskAction -Execute "$base\start.bat") -Trigger (New-ScheduledTaskTrigger -AtStartup) -Settings $config -User 'NT AUTHORITY\LOCAL SERVICE' -Force | Out-Null
-Register-ScheduledTask -TaskName 'Mentor-IA-AutoDeploy' -Action (New-ScheduledTaskAction -Execute 'powershell.exe' -Argument "-NoProfile -ExecutionPolicy Bypass -File $app\deploy\autodeploy.ps1") -Trigger (New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 2)) -User 'SYSTEM' -RunLevel Highest -Force | Out-Null
+Register-ScheduledTask -TaskName 'Mentor-IA' -Action (New-ScheduledTaskAction -Execute "$base\start.bat") -Trigger (New-ScheduledTaskTrigger -AtStartup) -Settings $config -Principal (New-ScheduledTaskPrincipal -UserId 'S-1-5-19' -LogonType ServiceAccount -RunLevel Limited) -Force | Out-Null
+Register-ScheduledTask -TaskName 'Mentor-IA-AutoDeploy' -Action (New-ScheduledTaskAction -Execute 'powershell.exe' -Argument "-NoProfile -ExecutionPolicy Bypass -File $app\deploy\autodeploy.ps1") -Trigger (New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 2)) -Principal (New-ScheduledTaskPrincipal -UserId 'S-1-5-18' -LogonType ServiceAccount -RunLevel Highest) -Force | Out-Null
 Start-ScheduledTask 'Mentor-IA'
