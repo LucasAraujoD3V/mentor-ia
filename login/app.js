@@ -132,6 +132,7 @@ async function render() {
   try {
     if (route === 'home') content = viewHome((await api('notices')).notices);
     else if (route === 'review') content = viewReview((await api('review')).review);
+    else if (window.MentorEstudos?.routes.includes(route)) content = await window.MentorEstudos.view(route, query); // Fase 3
     else content = ({ profile: viewProfile, notifications: viewNotifications, security: viewSecurity, accessibility: viewAccessibility, support: viewSupport, legal: viewLegal })[route]();
     if (id !== renderId) return;
     app.innerHTML = shell(route, content);

@@ -3,4 +3,3 @@ node_modules/
 data/
 *.sqlite*
 coverage/
-Cofre.md

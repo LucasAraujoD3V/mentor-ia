@@ -6,6 +6,7 @@ import { createPublicKey, verify as verifySignature } from 'node:crypto';
 import { db, getUser, findEmail, publicUser, cleanup } from './db.mjs';
 import { random, digest, otp, passwordError, hashPassword, verifyPassword, text, email, fail } from './security.mjs';
 import { production, realMail, mailbox, sendMail, clearMailbox } from './mail.mjs';
+import { estudos } from './estudos.mjs'; // Fase 3
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const port = Number(process.env.PORT || 3000);
@@ -117,6 +118,7 @@ async function readBody(req) {
 }
 async function api(req, res, url) {
   const route = url.pathname, method = req.method;
+  if (route.startsWith('/api/estudos/')) return estudos(req, res, url, { auth, json, readBody, rate, origin }); // Fase 3
   if (method === 'GET' && route === '/api/config') return json(res, { version: '0.2.0', google, development: !production, localMailbox: !production && !realMail, realMail, legalVersion: '2026-10-19-academica' });
   if (method === 'GET' && route === '/api/dev/mail') {
     if (production || realMail || !['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(req.socket.remoteAddress)) fail('Página não encontrada.', 404);
@@ -324,7 +326,7 @@ const server = http.createServer(async (req, res) => {
     const relative = p.slice(root.length + 1).replaceAll('\\', '/');
     if (!p.startsWith(root + sep) && p !== root) fail('Página não encontrada.', 404);
     // Explicit public file allowlist: never serve server source, data, docs or env.
-    if (!(p === root || ['index.html', 'styles.css', 'script.js', 'brandbook.html', '20260922_223141000_iOS.jpg'].includes(relative) || relative === 'login' || /^login\/(index\.html|app\.js|app\.css|fonts\/[a-z0-9.-]+\.woff2)$/.test(relative) || /^assets\/[a-z0-9_.-]+\.(jpg|png|svg|webp)$/.test(relative))) fail('Página não encontrada.', 404);
+    if (!(p === root || ['index.html', 'styles.css', 'script.js', 'brandbook.html', '20260922_223141000_iOS.jpg'].includes(relative) || relative === 'login' || /^login\/(index\.html|app\.js|app\.css|css\/estudos\.css|js\/(?:estudos|graficos)\.js|fonts\/[a-z0-9.-]+\.woff2)$/.test(relative) || /^assets\/[a-z0-9_.-]+\.(jpg|png|svg|webp)$/.test(relative))) fail('Página não encontrada.', 404);
     if ((await stat(p)).isDirectory()) p = resolve(p, 'index.html');
     const content = await readFile(p);
     if (p.includes(sep + 'login' + sep)) res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
