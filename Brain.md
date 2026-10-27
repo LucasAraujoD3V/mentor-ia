@@ -27,3 +27,10 @@ GitHub Pages serve só a parte estática: a aplicação aparece com aviso "sem c
 
 ## Configuracao
 Todas as credenciais estão no `Cofre.md` na raiz da pasta `Data`, fora do versionamento e nunca postado no git. `.env.example` mostra quais variáveis o projeto precisa.
+
+## Produção (sv0001)
+- Servidor **SERVER** (`192.168.0.176` / Tailscale `100.66.252.25`), pasta `C:\Mentor-IA` (código em `app\`, banco em `data\`, `.env` fechado, log `server.log`). Mesmo padrão do Painel CEO.
+- Tarefa `Mentor-IA` (SERVIÇO LOCAL, na inicialização) roda `start.bat` → Node na porta **3021**, só loopback, `NODE_ENV=production`.
+- **Publicar = `git push` na `main`**: a tarefa `Mentor-IA-AutoDeploy` (SYSTEM, a cada 2 min) roda `deploy/autodeploy.ps1`. Log: `C:\Mentor-IA\autodeploy.log`.
+- Endereço: `https://mentor.sv0001.com` via Cloudflare Tunnel `umbrel-server` → `http://127.0.0.1:3021` (rota criada no painel da Cloudflare).
+- E-mail: SMTP Gmail (porta 465) da conta já usada em outros projetos; IP real via cabeçalho `cf-connecting-ip` (`TRUST_PROXY_HEADER`).
