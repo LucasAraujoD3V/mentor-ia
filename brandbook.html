@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mentor IA — Brandbook</title>
+<title>Mentor IA — Identidade visual</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230FA83E'/%3E%3Ctext x='32' y='42' font-family='Arial' font-weight='900' font-size='28' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
 <style>
   :root {
@@ -27,7 +27,7 @@
   .dark { background: var(--preto); color: #fff; }
   .capa { background: var(--preto); color: #fff; padding: 48px 0 64px; border: 0; }
   .capa__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-  .capa img { width: 100%; border-radius: 16px; }
+  .capa .brand-art { width:100%; aspect-ratio:1254/930; background:#000 url("20260922_223141000_iOS.jpg") no-repeat center top / 100% auto; }
   .capa h1 { font-size: clamp(2.4rem, 6vw, 4.2rem); }
   .capa h1 span { color: var(--amarelo); }
   .faixa { display: flex; height: 10px; margin-top: 24px; border-radius: 99px; overflow: hidden; max-width: 320px; }
@@ -53,7 +53,7 @@
   .poses { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px; }
   .poses figure { text-align: center; font-size: .8rem; color: var(--cinza); }
   .slogan { font-family: var(--titulo); font-weight: 800; font-size: clamp(1.6rem, 4vw, 2.6rem); text-transform: uppercase; letter-spacing: .04em; }
-  .slogan-linha { display: flex; align-items: center; gap: 16px; justify-content: center; }
+  .slogan-linha { flex-wrap: wrap; display: flex; align-items: center; gap: 16px; justify-content: center; }
   .slogan-linha i { height: 4px; width: 60px; border-radius: 9px; }
   .pilares { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #333; border-radius: 16px; overflow: hidden; margin-top: 24px; }
   .pilares div { background: var(--preto); color: #fff; padding: 20px; text-align: center; font-family: var(--titulo); font-weight: 700; font-size: .9rem; text-transform: uppercase; }
@@ -73,16 +73,17 @@
 </style>
 </head>
 <body>
+<nav class="wrap" style="padding-block:20px"><a href="index.html">← Voltar ao Mentor IA</a></nav>
 
 <section class="capa">
   <div class="wrap capa__grid">
     <div>
       <p style="letter-spacing:.2em;text-transform:uppercase;font-size:.8rem;color:var(--verde-claro)">Manual de identidade visual · v1 · 2026</p>
-      <h1>Brandbook<br>Mentor<span>I</span><span style="color:var(--azul)">A</span></h1>
+      <h1>Nossa identidade<br>Mentor<span>I</span><span style="color:var(--azul)">A</span></h1>
       <p style="margin-top:16px;opacity:.85;max-width:420px">Guia para usar a marca Mentor IA do mesmo jeito em todos os lugares: site, redes sociais, banner e apresentação.</p>
       <div class="faixa"><i style="background:var(--verde)"></i><i style="background:var(--amarelo)"></i><i style="background:var(--azul)"></i><i style="background:#fff"></i></div>
     </div>
-    <img src="20260922_223141000_iOS.jpg" alt="Logotipo completo do Mentor IA">
+    <div class="brand-art" role="img" aria-label="Símbolo e nome Mentor IA"></div>
   </div>
 </section>
 
@@ -126,8 +127,8 @@
 <section>
   <div class="wrap" style="text-align:center">
     <h2><small>03 · Slogan</small>Assinatura verbal</h2>
-    <div class="slogan-linha" style="margin-top:28px"><i style="background:var(--verde)"></i><p class="slogan">Aprenda hoje, evolua sempre.</p><i style="background:var(--amarelo)"></i></div>
-    <p class="rotulo" style="margin-top:10px">Slogan da logo: caixa alta, espaçado, entre um traço verde e um traço amarelo.</p>
+    <div class="slogan-linha" style="margin-top:28px"><i style="background:var(--verde)"></i><p class="slogan">Aprenda pensando. Evolua entendendo.</p><i style="background:var(--amarelo)"></i></div>
+    <p class="rotulo" style="margin-top:10px">Slogan do projeto, usado na apresentação e na comunicação da marca.</p>
     <div class="pilares">
       <div>Ensino inteligente</div><div>IA que orienta</div><div>Aprendizado personalizado</div><div>Seu mentor, sempre com você</div>
     </div>
@@ -230,6 +231,6 @@
   </div>
 </section>
 
-<footer><p><strong>Equipe:</strong> Filipe Silva Avena · Lucas Araujo de Andrade · Victor Fernandes de Vasconcelos · Bruno Nascimento Rocha</p><p>Contato: escolamentoria@outlook.com.br · Instagram: @escolamentoria</p><p>Mentor IA · Brandbook v1 · Projeto acadêmico · 2026</p></footer>
+<footer><p><strong>Equipe:</strong> Filipe Silva Avena · Lucas Araujo de Andrade · Victor Fernandes de Vasconcelos · Bruno Nascimento Rocha</p><p>Contato: escolamentoria@outlook.com.br · Instagram: @escolamentoria</p><p>Mentor IA · Identidade visual · Projeto acadêmico · 2026</p></footer>
 </body>
 </html>

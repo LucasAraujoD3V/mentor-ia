@@ -1,0 +1,6 @@
+{
+  "name": "mentor-ia", "version": "0.2.0", "private": true, "type": "module",
+  "description": "Mentor IA — acesso e configurações, fases 1 e 2",
+  "engines": { "node": ">=24.10.0" },
+  "scripts": { "start": "node --env-file-if-exists=.env server/index.mjs", "test": "node --test tests/*.test.mjs" }
+}

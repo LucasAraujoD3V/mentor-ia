@@ -1,8 +1,6 @@
-Cofre.md
+node_modules/
 .env
-Senhas.md
-
-# notas internas (GitHub Pages publica todo .md da raiz como página)
-Brain.md
-REDES-SOCIAIS.md
-*.pdf
+data/
+*.sqlite*
+coverage/
+Cofre.md

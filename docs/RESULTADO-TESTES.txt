@@ -1,0 +1,22 @@
+▶ Fluxos reais de acesso, perfil, configurações e exclusão
+  ✔ Cadastro exige política, termos e confirmação; OTP não é exposto na resposta (185.4285ms)
+  ✔ Perfil salva e protege identificadores; rejeita foto adulterada (67.9207ms)
+  ✔ Preferências, fila programada, avisos internos e avaliação gerenciável (14864.6615ms)
+  ✔ Logout invalida sessão, login exige a segunda etapa e códigos expiram (242.3419ms)
+  ✔ Troca segura revoga sessão antiga e exige código vinculado à conta (241.1349ms)
+  ✔ Recuperação redefine senha e encerra sessões (204.2782ms)
+  ✔ OTP bloqueia após cinco erros; conta não confirmada pode solicitar outro com senha (296.3902ms)
+  ✔ Exclusão remove dados associados e revoga todos os acessos (130.2069ms)
+  ✔ Bloqueia CSRF, arquivos privados e Google sem credenciais; serve recursos estáticos (805.538ms)
+✔ Fluxos reais de acesso, perfil, configurações e exclusão (17322.2152ms)
+✔ Telas de conta preservam rótulos, IDs únicos e escapam dados do usuário (5.3869ms)
+✔ Telas de acesso têm formulários acessíveis e distinguem servidor indisponível (1.6553ms)
+✔ Senha tem salt individual, hash verificável e política no servidor (250.8436ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 19441.3527
