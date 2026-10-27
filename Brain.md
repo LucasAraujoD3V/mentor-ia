@@ -1,6 +1,6 @@
 # Brain — Mentor IA
 
-Plataforma Web acadêmica (ADS) para estudantes do ensino médio. Node.js 24 + SQLite nativo, sem dependências npm.
+Plataforma Web acadêmica (ADS) para estudantes do ensino médio, focada em Matemática (as "disciplinas" do modelo aparecem como conteúdos de Matemática). Node.js 24 + SQLite nativo, sem dependências npm.
 
 ## Estrutura
 - `index.html`, `styles.css`, `script.js`, `assets/`, `brandbook.html`: landing page (GitHub Pages).

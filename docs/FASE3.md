@@ -2,6 +2,8 @@
 
 Versão 0.3.0 (27/10/2026). Módulo de estudos acrescentado sem reescrever as fases 1 e 2.
 
+**Escopo: o aplicativo é focado em Matemática.** A entidade "disciplina" do modelo (tabela `subjects`) aparece na interface e nos relatórios como **conteúdo de Matemática** (ex.: Funções, Geometria plana, Trigonometria, Probabilidade e estatística, Progressões). Nas tabelas abaixo, leia "disciplina" como "conteúdo".
+
 ## Requisitos acrescentados à Engenharia e Modelagem
 
 | Código | Requisito | Onde está |

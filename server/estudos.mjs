@@ -10,8 +10,8 @@ const PRIORIDADES = { baixa: 'Baixa', media: 'Média', alta: 'Alta' };
 const SITUACOES = { com_duvidas: 'Com dúvidas pendentes', sem_sessoes: 'Sem sessões', abaixo_meta: 'Abaixo da meta nos últimos 7 dias', meta_cumprida: 'Meta cumprida nos últimos 7 dias' };
 const ORDENS = {
   disciplinas: { nome: 'nome', meta: 'meta semanal', sessoes: 'sessões', minutos: 'tempo total', semana: 'últimos 7 dias', duvidas: 'dúvidas pendentes', desempenho: 'desempenho', criada: 'cadastro' },
-  sessoes: { data: 'data', duracao: 'duração', disciplina: 'disciplina', tema: 'tema', status: 'situação', desempenho: 'desempenho' },
-  duvidas: { criada: 'registro', atualizada: 'atualização', titulo: 'título', prioridade: 'prioridade', situacao: 'situação', disciplina: 'disciplina' }
+  sessoes: { data: 'data', duracao: 'duração', disciplina: 'conteúdo', tema: 'tema', status: 'situação', desempenho: 'desempenho' },
+  duvidas: { criada: 'registro', atualizada: 'atualização', titulo: 'título', prioridade: 'prioridade', situacao: 'situação', disciplina: 'conteúdo' }
 };
 const LIMITE_RELATORIO = 5000;
 const plural = (n, um, varios) => `${n} ${n === 1 ? um : varios}`;
@@ -57,12 +57,12 @@ function validarDisciplina(userId, b, id) {
     weekly_goal: inteiro(b.weekly_goal, 'Meta semanal (minutos)', 0, 3000),
     description: campo(b.description, 'Descrição', 0, 300)
   };
-  if (dados.nomeEmUso(userId, d.name, id)) fail('Já existe uma disciplina com esse nome.', 409);
+  if (dados.nomeEmUso(userId, d.name, id)) fail('Já existe um conteúdo com esse nome.', 409);
   return d;
 }
 function validarSessao(userId, b, atual) {
   const s = {
-    subject_id: identificador(b.subject_id, 'Disciplina'),
+    subject_id: identificador(b.subject_id, 'Conteúdo'),
     day: dia(b.day, 'Data'),
     minutes: inteiro(b.minutes, 'Duração (minutos)', 5, 720),
     topic: campo(b.topic, 'Tema estudado', 2, 120),
@@ -70,18 +70,18 @@ function validarSessao(userId, b, atual) {
     notes: campo(b.notes, 'Anotações', 0, 1000),
     performance: null
   };
-  if (!dados.obterDisciplina(userId, s.subject_id)) fail('Disciplina: selecione uma disciplina cadastrada.');
+  if (!dados.obterDisciplina(userId, s.subject_id)) fail('Conteúdo: selecione um conteúdo cadastrado.');
   if (s.status === 'concluida') {
     if (vazio(b.performance)) fail('Avalie seu desempenho de 1 a 5 para registrar a sessão como concluída.');
     s.performance = inteiro(b.performance, 'Desempenho', 1, 5);
     if (s.day > dados.hoje()) fail('Uma sessão concluída não pode ter data futura. Use a situação "Planejada".');
   }
-  if (atual && atual.subject_id !== s.subject_id && atual.questions) fail(`Esta sessão tem ${plural(atual.questions, 'dúvida vinculada', 'dúvidas vinculadas')} à disciplina atual. Desvincule-as antes de trocar a disciplina.`, 409);
+  if (atual && atual.subject_id !== s.subject_id && atual.questions) fail(`Esta sessão tem ${plural(atual.questions, 'dúvida vinculada', 'dúvidas vinculadas')} ao conteúdo atual. Desvincule-as antes de trocar o conteúdo.`, 409);
   return s;
 }
 function validarDuvida(userId, b, atual) {
   const q = {
-    subject_id: identificador(b.subject_id, 'Disciplina'),
+    subject_id: identificador(b.subject_id, 'Conteúdo'),
     session_id: vazio(b.session_id) ? null : identificador(b.session_id, 'Sessão vinculada'),
     title: campo(b.title, 'Título', 3, 120),
     details: campo(b.details, 'Detalhes', 0, 1000),
@@ -89,11 +89,11 @@ function validarDuvida(userId, b, atual) {
     status: opcao(b.status, STATUS_DUVIDA, 'Situação'),
     resolution: campo(b.resolution, 'Como foi resolvida', 0, 1000)
   };
-  if (!dados.obterDisciplina(userId, q.subject_id)) fail('Disciplina: selecione uma disciplina cadastrada.');
+  if (!dados.obterDisciplina(userId, q.subject_id)) fail('Conteúdo: selecione um conteúdo cadastrado.');
   if (q.session_id) {
     const s = dados.obterSessao(userId, q.session_id);
     if (!s) fail('Sessão vinculada: selecione uma sessão cadastrada.');
-    if (s.subject_id !== q.subject_id) fail('A sessão escolhida pertence a outra disciplina.');
+    if (s.subject_id !== q.subject_id) fail('A sessão escolhida pertence a outro conteúdo.');
   }
   if (q.status === 'resolvida' && q.resolution.length < 3) fail('Descreva como a dúvida foi resolvida (mínimo de 3 caracteres).');
   q.resolved = q.status === 'resolvida' ? (atual?.status === 'resolvida' ? atual.resolved : Date.now()) : null;
@@ -108,7 +108,7 @@ function filtros(q, tipo) {
   if (Number.isSafeInteger(pagina) && pagina > 0) f.pagina = pagina;
   if (q.get('ordem') && Object.hasOwn(ORDENS[tipo], q.get('ordem'))) f.ordem = q.get('ordem');
   if (q.get('q')) f.q = campo(q.get('q'), 'Busca', 1, 80);
-  if (q.get('disciplina')) f.disciplina = identificador(q.get('disciplina'), 'Disciplina');
+  if (q.get('disciplina')) f.disciplina = identificador(q.get('disciplina'), 'Conteúdo');
   if (q.get('de')) f.de = dia(q.get('de'), 'Data inicial');
   if (q.get('ate')) f.ate = dia(q.get('ate'), 'Data final');
   if (f.de && f.ate && f.de > f.ate) fail('A data inicial deve ser anterior ou igual à data final.');
@@ -139,7 +139,7 @@ function filtrosPainel(q) {
     const dias = opcao(periodo, { 7: 1, 30: 1, 90: 1, 365: 1 }, 'Período');
     ate = hoje; de = dados.somarDias(hoje, -(Number(dias) - 1));
   }
-  return { de, ate, disciplina: q.get('disciplina') ? identificador(q.get('disciplina'), 'Disciplina') : null };
+  return { de, ate, disciplina: q.get('disciplina') ? identificador(q.get('disciplina'), 'Conteúdo') : null };
 }
 function medir(fn) {
   const inicio = performance.now(), r = fn();
@@ -161,7 +161,7 @@ export async function estudos(req, res, url, { auth, json, readBody, rate, origi
     const detalhe = /^disciplinas\/(\d{1,15})$/.exec(rota);
     if (detalhe) {
       const r = dados.detalheDisciplina(u.id, Number(detalhe[1]));
-      if (!r) fail('Disciplina não encontrada.', 404);
+      if (!r) fail('Conteúdo não encontrado.', 404);
       return json(res, r);
     }
     fail('Página não encontrada.', 404);
@@ -175,17 +175,17 @@ export async function estudos(req, res, url, { auth, json, readBody, rate, origi
 
   if (rota === 'disciplinas/salvar') {
     const id = idDe();
-    if (id && !dados.obterDisciplina(u.id, id)) fail('Disciplina não encontrada.', 404);
+    if (id && !dados.obterDisciplina(u.id, id)) fail('Conteúdo não encontrado.', 404);
     const item = dados.salvarDisciplina(u.id, validarDisciplina(u.id, b, id), id);
-    return json(res, { item, message: id ? 'Disciplina atualizada.' : 'Disciplina cadastrada.' });
+    return json(res, { item, message: id ? 'Conteúdo atualizado.' : 'Conteúdo cadastrado.' });
   }
   if (rota === 'disciplinas/excluir') {
-    const atual = dados.obterDisciplina(u.id, identificador(b.id, 'Disciplina'));
-    if (!atual) fail('Disciplina não encontrada.', 404);
+    const atual = dados.obterDisciplina(u.id, identificador(b.id, 'Conteúdo'));
+    if (!atual) fail('Conteúdo não encontrado.', 404);
     // Regra de integridade: sessões são o histórico de estudo e bloqueiam a exclusão.
-    if (atual.sessions) fail(`Não é possível excluir "${atual.name}": há ${plural(atual.sessions, 'sessão de estudo vinculada', 'sessões de estudo vinculadas')}. Exclua ou mova essas sessões para outra disciplina antes.`, 409);
+    if (atual.sessions) fail(`Não é possível excluir "${atual.name}": há ${plural(atual.sessions, 'sessão de estudo vinculada', 'sessões de estudo vinculadas')}. Exclua ou mova essas sessões para outro conteúdo antes.`, 409);
     dados.excluirDisciplina(u.id, atual.id);
-    return json(res, { message: 'Disciplina excluída.' + (atual.questions ? ` ${plural(atual.questions, 'dúvida vinculada também foi excluída', 'dúvidas vinculadas também foram excluídas')}.` : '') });
+    return json(res, { message: 'Conteúdo excluído.' + (atual.questions ? ` ${plural(atual.questions, 'dúvida vinculada também foi excluída', 'dúvidas vinculadas também foram excluídas')}.` : '') });
   }
   if (rota === 'sessoes/salvar') {
     const id = idDe(), atual = id ? dados.obterSessao(u.id, id) : null;
@@ -212,14 +212,14 @@ export async function estudos(req, res, url, { auth, json, readBody, rate, origi
     return json(res, { message: 'Dúvida excluída.' });
   }
   if (rota === 'exemplo') {
-    if (dados.totalDisciplinas(u.id)) fail('Os dados de exemplo só podem ser carregados enquanto você não tiver disciplinas cadastradas.', 409);
+    if (dados.totalDisciplinas(u.id)) fail('Os dados de exemplo só podem ser carregados enquanto você não tiver conteúdos cadastrados.', 409);
     const r = dados.criarExemplo(u.id);
-    return json(res, { message: `Dados de exemplo carregados: ${r.subjects} disciplinas, ${r.sessions} sessões e ${r.questions} dúvidas fictícias.` });
+    return json(res, { message: `Dados de exemplo carregados: ${r.subjects} conteúdos de Matemática, ${r.sessions} sessões e ${r.questions} dúvidas fictícias.` });
   }
   if (rota === 'limpar') {
     if (b.confirm !== 'LIMPAR') fail('Digite LIMPAR para confirmar.');
     const r = dados.limparEstudos(u.id);
-    return json(res, { message: `Dados de estudo removidos: ${plural(r.subjects, 'disciplina', 'disciplinas')}, ${plural(r.sessions, 'sessão', 'sessões')} e ${plural(r.questions, 'dúvida', 'dúvidas')}.` });
+    return json(res, { message: `Dados de estudo removidos: ${plural(r.subjects, 'conteúdo', 'conteúdos')}, ${plural(r.sessions, 'sessão', 'sessões')} e ${plural(r.questions, 'dúvida', 'dúvidas')}.` });
   }
   fail('Página não encontrada.', 404);
 }
@@ -227,7 +227,7 @@ export async function estudos(req, res, url, { auth, json, readBody, rate, origi
 // ---------- Relatórios (PDF e XLSX a partir das mesmas consultas) ----------
 function descrever(u, f, tipo, extras) {
   const lista = [['Período', f.de || f.ate ? `${f.de ? dataBR(f.de) : 'início'} a ${f.ate ? dataBR(f.ate) : 'hoje'}` : 'todo o histórico']];
-  if (f.disciplina) lista.push(['Disciplina', dados.obterDisciplina(u.id, f.disciplina)?.name || 'não encontrada']);
+  if (f.disciplina) lista.push(['Conteúdo', dados.obterDisciplina(u.id, f.disciplina)?.name || 'não encontrada']);
   lista.push(...extras.filter(([, v]) => v));
   if (f.q) lista.push(['Busca', `"${f.q}"`]);
   lista.push(['Ordenação', f.ordem ? `${ORDENS[tipo][f.ordem]} (${f.dir === 'asc' ? 'crescente' : 'decrescente'})` : 'padrão']);
@@ -243,9 +243,9 @@ function relatorioSessoes(u, q) {
     filtros: descrever(u, f, 'sessoes', [['Situação', STATUS_SESSAO[f.status]], ['Duração', f.dmin || f.dmax ? `${f.dmin || 5} a ${f.dmax || 720} min` : ''], ['Desempenho mínimo', f.nota ? `${f.nota} / 5` : '']]),
     resumo: [['Sessões encontradas', s.sessions.toLocaleString('pt-BR')], ['Tempo estudado (concluídas)', duracao(s.minutes)], ['Desempenho médio', media(s.performance)], ['Concluídas · planejadas · canceladas', `${s.done} · ${s.planned} · ${s.canceled}`]],
     tabelas: [
-      { titulo: 'Sessões', colunas: [{ titulo: 'Data', largura: 9, tipo: 'data' }, { titulo: 'Disciplina', largura: 16 }, { titulo: 'Tema', largura: 24 }, { titulo: 'Situação', largura: 10 }, { titulo: 'Duração', largura: 8, tipo: 'duracao' }, { titulo: 'Desempenho', largura: 9, tipo: 'numero' }, { titulo: 'Dúvidas', largura: 7, tipo: 'numero' }, { titulo: 'Anotações', largura: 24 }],
+      { titulo: 'Sessões', colunas: [{ titulo: 'Data', largura: 9, tipo: 'data' }, { titulo: 'Conteúdo', largura: 16 }, { titulo: 'Tema', largura: 24 }, { titulo: 'Situação', largura: 10 }, { titulo: 'Duração', largura: 8, tipo: 'duracao' }, { titulo: 'Desempenho', largura: 9, tipo: 'numero' }, { titulo: 'Dúvidas', largura: 7, tipo: 'numero' }, { titulo: 'Anotações', largura: 24 }],
         linhas: r.items.map(x => [x.day, x.subject, x.topic, STATUS_SESSAO[x.status], x.minutes, x.performance, x.questions, x.notes]) },
-      { titulo: 'Consolidado por disciplina', planilha: 'Por disciplina', colunas: [{ titulo: 'Disciplina', largura: 30 }, { titulo: 'Sessões', largura: 12, tipo: 'numero' }, { titulo: 'Concluídas', largura: 12, tipo: 'numero' }, { titulo: 'Tempo estudado', largura: 14, tipo: 'duracao' }, { titulo: 'Desempenho médio', largura: 14, tipo: 'decimal' }],
+      { titulo: 'Consolidado por conteúdo', planilha: 'Por conteúdo', colunas: [{ titulo: 'Conteúdo', largura: 30 }, { titulo: 'Sessões', largura: 12, tipo: 'numero' }, { titulo: 'Concluídas', largura: 12, tipo: 'numero' }, { titulo: 'Tempo estudado', largura: 14, tipo: 'duracao' }, { titulo: 'Desempenho médio', largura: 14, tipo: 'decimal' }],
         linhas: dados.sessoesPorDisciplina(u.id, f).map(x => [x.subject, x.sessions, x.done, x.minutes, x.performance]) }
     ]
   };
@@ -257,9 +257,9 @@ function relatorioDuvidas(u, q) {
     filtros: descrever(u, f, 'duvidas', [['Situação', f.status === 'pendentes' ? 'Pendentes (abertas e em estudo)' : STATUS_DUVIDA[f.status]], ['Prioridade', PRIORIDADES[f.prioridade]], ['Vínculo', { com_sessao: 'Com sessão vinculada', sem_sessao: 'Sem sessão vinculada' }[f.vinculo]], ['Sessão', f.sessao ? `nº ${f.sessao}` : '']]),
     resumo: [['Dúvidas encontradas', String(s.questions)], ['Abertas · em estudo', `${s.open} · ${s.studying}`], ['Resolvidas', String(s.resolved)], ['Pendentes de alta prioridade', String(s.urgent)]],
     tabelas: [
-      { titulo: 'Dúvidas', colunas: [{ titulo: 'Registro', largura: 9, tipo: 'data' }, { titulo: 'Disciplina', largura: 15 }, { titulo: 'Título', largura: 26 }, { titulo: 'Prioridade', largura: 9 }, { titulo: 'Situação', largura: 9 }, { titulo: 'Sessão vinculada', largura: 18 }, { titulo: 'Resolvida em', largura: 9, tipo: 'data' }, { titulo: 'Como foi resolvida', largura: 20 }],
+      { titulo: 'Dúvidas', colunas: [{ titulo: 'Registro', largura: 9, tipo: 'data' }, { titulo: 'Conteúdo', largura: 15 }, { titulo: 'Título', largura: 26 }, { titulo: 'Prioridade', largura: 9 }, { titulo: 'Situação', largura: 9 }, { titulo: 'Sessão vinculada', largura: 18 }, { titulo: 'Resolvida em', largura: 9, tipo: 'data' }, { titulo: 'Como foi resolvida', largura: 20 }],
         linhas: r.items.map(x => [diaDe(x.created), x.subject, x.title, PRIORIDADES[x.priority], STATUS_DUVIDA[x.status], x.session_id ? `${dataBR(x.session_day)} · ${x.session_topic}` : '', x.resolved ? diaDe(x.resolved) : '', x.resolution]) },
-      { titulo: 'Consolidado por disciplina', planilha: 'Por disciplina', colunas: [{ titulo: 'Disciplina', largura: 30 }, { titulo: 'Total', largura: 10, tipo: 'numero' }, { titulo: 'Abertas', largura: 10, tipo: 'numero' }, { titulo: 'Em estudo', largura: 10, tipo: 'numero' }, { titulo: 'Resolvidas', largura: 10, tipo: 'numero' }],
+      { titulo: 'Consolidado por conteúdo', planilha: 'Por conteúdo', colunas: [{ titulo: 'Conteúdo', largura: 30 }, { titulo: 'Total', largura: 10, tipo: 'numero' }, { titulo: 'Abertas', largura: 10, tipo: 'numero' }, { titulo: 'Em estudo', largura: 10, tipo: 'numero' }, { titulo: 'Resolvidas', largura: 10, tipo: 'numero' }],
         linhas: dados.duvidasPorDisciplina(u.id, f).map(x => [x.subject, x.questions, x.open, x.studying, x.resolved]) }
     ]
   };
@@ -267,10 +267,10 @@ function relatorioDuvidas(u, q) {
 function relatorioDisciplinas(u, q) {
   const f = { ...filtros(q, 'disciplinas'), pagina: 1, por: LIMITE_RELATORIO }, r = dados.listarDisciplinas(u.id, f), s = r.summary;
   return {
-    titulo: 'Relatório de disciplinas', aviso: aviso(r.total),
+    titulo: 'Relatório de conteúdos de Matemática', aviso: aviso(r.total),
     filtros: descrever(u, { ...f, de: '', ate: '' }, 'disciplinas', [['Situação', SITUACOES[f.situacao]]]).slice(1),
-    resumo: [['Disciplinas', String(s.subjects)], ['Tempo total estudado', duracao(s.minutes)], ['Últimos 7 dias / meta semanal', `${duracao(s.week_minutes)} / ${duracao(s.weekly_goal)}`], ['Dúvidas pendentes', String(s.open_questions)]],
-    tabelas: [{ titulo: 'Disciplinas', colunas: [{ titulo: 'Disciplina', largura: 20 }, { titulo: 'Meta semanal', largura: 10, tipo: 'duracao' }, { titulo: 'Últimos 7 dias', largura: 10, tipo: 'duracao' }, { titulo: 'Sessões', largura: 8, tipo: 'numero' }, { titulo: 'Tempo total', largura: 10, tipo: 'duracao' }, { titulo: 'Desempenho médio', largura: 11, tipo: 'decimal' }, { titulo: 'Dúvidas pendentes', largura: 11, tipo: 'numero' }, { titulo: 'Último estudo', largura: 10, tipo: 'data' }, { titulo: 'Descrição', largura: 20 }],
+    resumo: [['Conteúdos', String(s.subjects)], ['Tempo total estudado', duracao(s.minutes)], ['Últimos 7 dias / meta semanal', `${duracao(s.week_minutes)} / ${duracao(s.weekly_goal)}`], ['Dúvidas pendentes', String(s.open_questions)]],
+    tabelas: [{ titulo: 'Conteúdos', colunas: [{ titulo: 'Conteúdo', largura: 20 }, { titulo: 'Meta semanal', largura: 10, tipo: 'duracao' }, { titulo: 'Últimos 7 dias', largura: 10, tipo: 'duracao' }, { titulo: 'Sessões', largura: 8, tipo: 'numero' }, { titulo: 'Tempo total', largura: 10, tipo: 'duracao' }, { titulo: 'Desempenho médio', largura: 11, tipo: 'decimal' }, { titulo: 'Dúvidas pendentes', largura: 11, tipo: 'numero' }, { titulo: 'Último estudo', largura: 10, tipo: 'data' }, { titulo: 'Descrição', largura: 20 }],
       linhas: r.items.map(x => [x.name, x.weekly_goal, x.week_minutes, x.sessions, x.minutes, x.performance, x.open_questions, x.last_day, x.description]) }]
   };
 }
@@ -278,10 +278,10 @@ function relatorioPainel(u, q) {
   const f = filtrosPainel(q), p = dados.painel(u.id, f), k = p.kpis;
   return {
     titulo: 'Resumo do painel de estudos',
-    filtros: [['Período', `${dataBR(f.de)} a ${dataBR(f.ate)} (${p.period.days} dias)`], ['Disciplina', f.disciplina ? dados.obterDisciplina(u.id, f.disciplina)?.name || 'não encontrada' : 'todas']],
+    filtros: [['Período', `${dataBR(f.de)} a ${dataBR(f.ate)} (${p.period.days} dias)`], ['Conteúdo', f.disciplina ? dados.obterDisciplina(u.id, f.disciplina)?.name || 'não encontrado' : 'todos']],
     resumo: [['Tempo estudado', duracao(k.minutes)], ['Cumprimento da meta', k.goalPercent === null ? 'sem meta definida' : `${k.goalPercent}% de ${duracao(k.goalMinutes)}`], ['Desempenho médio', media(k.performance)], ['Dúvidas pendentes (agora)', String(k.pendingQuestions)], ['Sessões concluídas', String(k.done)], ['Sessões planejadas', String(k.planned)], ['Sessões canceladas', String(k.canceled)], ['Dúvidas resolvidas no período', String(k.resolvedQuestions)]],
     tabelas: [
-      { titulo: 'Tempo por disciplina no período', planilha: 'Por disciplina', colunas: [{ titulo: 'Disciplina', largura: 26 }, { titulo: 'Meta do período', largura: 12, tipo: 'duracao' }, { titulo: 'Tempo estudado', largura: 12, tipo: 'duracao' }, { titulo: '% da meta', largura: 10, tipo: 'numero' }, { titulo: 'Sessões concluídas', largura: 12, tipo: 'numero' }, { titulo: 'Desempenho médio', largura: 12, tipo: 'decimal' }],
+      { titulo: 'Tempo por conteúdo no período', planilha: 'Por conteúdo', colunas: [{ titulo: 'Conteúdo', largura: 26 }, { titulo: 'Meta do período', largura: 12, tipo: 'duracao' }, { titulo: 'Tempo estudado', largura: 12, tipo: 'duracao' }, { titulo: '% da meta', largura: 10, tipo: 'numero' }, { titulo: 'Sessões concluídas', largura: 12, tipo: 'numero' }, { titulo: 'Desempenho médio', largura: 12, tipo: 'decimal' }],
         linhas: p.subjects.map(d => [d.name, d.goal, d.minutes, d.goal ? Math.round(d.minutes / d.goal * 100) : null, d.done, d.performance]) },
       { titulo: `Evolução do tempo estudado (por ${p.period.granularity})`, planilha: 'Evolução', colunas: [{ titulo: 'Início', largura: 12, tipo: 'data' }, { titulo: 'Fim', largura: 12, tipo: 'data' }, { titulo: 'Tempo estudado', largura: 14, tipo: 'duracao' }],
         linhas: p.series.map(x => [x.start, x.end, x.minutes]) },

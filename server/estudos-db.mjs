@@ -256,19 +256,20 @@ export function criarExemplo(userId) {
     return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
   };
   const escolher = lista => lista[Math.floor(aleatorio() * lista.length)];
+  // O app é focado em Matemática: cada "disciplina" do modelo é um conteúdo de Matemática.
   const catalogo = [
-    ['Matemática', 1, 240, 'Funções, geometria e probabilidade para o ENEM.', ['Função afim', 'Função quadrática', 'Trigonometria', 'Probabilidade', 'Progressões aritméticas']],
-    ['Língua Portuguesa', 2, 180, 'Interpretação de texto, gramática e redação.', ['Redação dissertativa', 'Concordância verbal', 'Figuras de linguagem', 'Interpretação de texto']],
-    ['Física', 3, 150, 'Cinemática, dinâmica e energia.', ['Movimento uniforme', 'Leis de Newton', 'Energia mecânica', 'Lançamento oblíquo']],
-    ['Química', 7, 120, 'Estequiometria, ligações e soluções.', ['Ligações químicas', 'Estequiometria', 'Soluções', 'Funções inorgânicas']],
-    ['História', 4, 90, 'Brasil República e história contemporânea.', ['Era Vargas', 'Ditadura militar', 'Guerra Fria', 'Redemocratização']]
+    ['Funções', 1, 240, 'Função afim, quadrática, exponencial e logaritmos.', ['Função afim', 'Função quadrática', 'Função exponencial', 'Logaritmos']],
+    ['Geometria plana', 2, 180, 'Áreas, semelhança de triângulos e Teorema de Pitágoras.', ['Áreas de figuras planas', 'Semelhança de triângulos', 'Teorema de Pitágoras', 'Circunferência']],
+    ['Trigonometria', 3, 150, 'Razões trigonométricas e ciclo trigonométrico.', ['Seno, cosseno e tangente', 'Ciclo trigonométrico', 'Lei dos senos', 'Lei dos cossenos']],
+    ['Probabilidade e estatística', 7, 120, 'Contagem, probabilidade e medidas estatísticas.', ['Princípio fundamental da contagem', 'Arranjo e combinação', 'Probabilidade', 'Média, moda e mediana']],
+    ['Progressões', 4, 90, 'Progressão aritmética (PA) e geométrica (PG).', ['Progressão aritmética', 'Progressão geométrica', 'Soma dos termos da PG', 'Problemas com PA']]
   ];
   const duvidas = {
-    'Matemática': ['Quando usar a fórmula de Bhaskara?', 'Como achar o vértice da parábola?', 'Diferença entre arranjo e combinação'],
-    'Língua Portuguesa': ['Como fazer a proposta de intervenção?', 'Crase antes de nomes de cidade'],
-    'Física': ['Quando a força de atrito é estática?', 'Como decompor a velocidade no lançamento?'],
-    'Química': ['Como balancear equações com oxirredução?', 'Diferença entre molaridade e molalidade'],
-    'História': ['Quais as fases da Era Vargas?']
+    'Funções': ['Quando usar a fórmula de Bhaskara?', 'Como achar o vértice da parábola?', 'Como resolver equação exponencial com bases diferentes?'],
+    'Geometria plana': ['Como saber se dois triângulos são semelhantes?', 'Qual a diferença entre área e comprimento da circunferência?'],
+    'Trigonometria': ['Por que o seno de 30° é 1/2?', 'Quando usar a lei dos cossenos?'],
+    'Probabilidade e estatística': ['Diferença entre arranjo e combinação', 'Como calcular a probabilidade de eventos independentes?'],
+    'Progressões': ['Como achar a razão de uma PG?']
   };
   const dia = hoje(), agora = Date.now();
   return transacao(() => {

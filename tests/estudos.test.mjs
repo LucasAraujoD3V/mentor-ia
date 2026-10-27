@@ -161,7 +161,7 @@ test('Fase 3: cadastros, relacionamentos, consultas, painel e relatórios', { ti
     assert.equal(pdf.status, 200); assert.equal(pdf.response.headers.get('content-type'), 'application/pdf');
     assert.match(pdf.response.headers.get('content-disposition'), /mentor-ia-sessoes-\d{4}-\d{2}-\d{2}\.pdf/);
     const texto = lerPdf(pdf.result);
-    for (const trecho of ['Relatório de sessões de estudo', 'Gerado em', 'Filtros aplicados', 'Situação: Concluída', 'Dados consolidados', 'Química', 'Soluções', 'Consolidado por disciplina', 'Página 1 de 1']) assert.ok(texto.includes(trecho), 'PDF contém: ' + trecho);
+    for (const trecho of ['Relatório de sessões de estudo', 'Gerado em', 'Filtros aplicados', 'Situação: Concluída', 'Dados consolidados', 'Química', 'Soluções', 'Consolidado por conteúdo', 'Página 1 de 1']) assert.ok(texto.includes(trecho), 'PDF contém: ' + trecho);
     const planilha = await b.call('estudos/relatorio?formato=xlsx&tipo=painel&periodo=30');
     assert.equal(planilha.status, 200);
     const arquivos = lerZip(planilha.result);
